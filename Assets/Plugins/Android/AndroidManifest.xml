@@ -10,11 +10,9 @@
     </activity>
     <meta-data android:name="unityplayer.SkipPermissionsDialog" android:value="false" />
     <meta-data android:name="com.samsung.android.vr.application.mode" android:value="vr_only" />
-    <meta-data android:name="com.oculus.supportedDevices" android:value="quest" />
+    <meta-data android:name="com.oculus.supportedDevices" android:value="delmar" />
   </application>
   <uses-feature android:name="android.hardware.vr.headtracking" android:version="1" android:required="true" />
   <uses-feature android:name="oculus.software.handtracking" android:required="true" />
   <uses-permission android:name="com.oculus.permission.HAND_TRACKING" />
-  <uses-permission android:name="android.permission.INTERNET" />
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>
