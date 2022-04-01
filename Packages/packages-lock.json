@@ -1,7 +1,11 @@
 {
   "dependencies": {
     "com.unity.collab-proxy": {
+<<<<<<< Updated upstream
       "version": "1.15.13",
+=======
+      "version": "1.11.2",
+>>>>>>> Stashed changes
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -26,7 +30,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
+<<<<<<< Updated upstream
       "version": "2.0.14",
+=======
+      "version": "2.0.11",
+>>>>>>> Stashed changes
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -35,7 +43,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.vscode": {
+<<<<<<< Updated upstream
       "version": "1.2.5",
+=======
+      "version": "1.2.4",
+>>>>>>> Stashed changes
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -85,7 +97,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
+<<<<<<< Updated upstream
       "version": "1.1.31",
+=======
+      "version": "1.1.29",
+>>>>>>> Stashed changes
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -126,7 +142,11 @@
       }
     },
     "com.unity.xr.legacyinputhelpers": {
+<<<<<<< Updated upstream
       "version": "2.1.9",
+=======
+      "version": "2.1.8",
+>>>>>>> Stashed changes
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -136,8 +156,13 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.management": {
+<<<<<<< Updated upstream
       "version": "4.2.0",
       "depth": 1,
+=======
+      "version": "4.0.1",
+      "depth": 0,
+>>>>>>> Stashed changes
       "source": "registry",
       "dependencies": {
         "com.unity.modules.subsystems": "1.0.0",
@@ -149,11 +174,19 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.xr.oculus": {
+<<<<<<< Updated upstream
       "version": "1.11.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.xr.management": "4.2.0",
+=======
+      "version": "1.10.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.xr.management": "4.0.1",
+>>>>>>> Stashed changes
         "com.unity.ugui": "1.0.0"
       },
       "url": "https://packages.unity.com"
