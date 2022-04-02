@@ -1,8 +1,12 @@
 /************************************************************************************
 Copyright : Copyright (c) Facebook Technologies, LLC and its affiliates. All rights reserved.
 
-Your use of this SDK or tool is subject to the Oculus SDK License Agreement, available at
-https://developer.oculus.com/licenses/oculussdk/
+Licensed under the Oculus Master SDK License Version 1.0 (the "License"); you may not use
+the Utilities SDK except in compliance with the License, which is provided at the time of installation
+or download, or which otherwise accompanies this software in either electronic or hard copy form.
+
+You may obtain a copy of the License at
+https://developer.oculus.com/licenses/oculusmastersdk-1.0/
 
 Unless required by applicable law or agreed to in writing, the Utilities SDK distributed
 under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
@@ -24,13 +28,14 @@ public abstract class OVRComposition {
 	public bool cameraInTrackingSpace = false;
 	public OVRCameraRig cameraRig = null;
 
-	protected OVRComposition(GameObject parentObject, Camera mainCamera, OVRMixedRealityCaptureConfiguration configuration) {
-		RefreshCameraRig(parentObject, mainCamera);
+	protected OVRComposition(GameObject parentObject, Camera mainCamera)
+	{
+        RefreshCameraRig(parentObject, mainCamera);
 	}
 
 	public abstract OVRManager.CompositionMethod CompositionMethod();
 
-	public abstract void Update(GameObject gameObject, Camera mainCamera, OVRMixedRealityCaptureConfiguration configuration, OVRManager.TrackingOrigin trackingOrigin);
+	public abstract void Update(GameObject gameObject, Camera mainCamera);
 	public abstract void Cleanup();
 
 	public virtual void RecenterPose() { }
@@ -38,22 +43,22 @@ public abstract class OVRComposition {
 	protected bool usingLastAttachedNodePose = false;
 	protected OVRPose lastAttachedNodePose = new OVRPose();            // Sometimes the attach node pose is not readable (lose tracking, low battery, etc.) Use the last pose instead when it happens
 
-	public void RefreshCameraRig(GameObject parentObject, Camera mainCamera)
-	{
-		OVRCameraRig cameraRig = mainCamera.GetComponentInParent<OVRCameraRig>();
-		if (cameraRig == null)
-		{
-			cameraRig = parentObject.GetComponent<OVRCameraRig>();
-		}
-		cameraInTrackingSpace = (cameraRig != null && cameraRig.trackingSpace != null);
-		this.cameraRig = cameraRig;
-		Debug.Log(cameraRig == null ? "[OVRComposition] CameraRig not found" : "[OVRComposition] CameraRig found");
-	}
+    public void RefreshCameraRig(GameObject parentObject, Camera mainCamera)
+    {
+        OVRCameraRig cameraRig = mainCamera.GetComponentInParent<OVRCameraRig>();
+        if (cameraRig == null)
+        {
+            cameraRig = parentObject.GetComponent<OVRCameraRig>();
+        }
+        cameraInTrackingSpace = (cameraRig != null && cameraRig.trackingSpace != null);
+        this.cameraRig = cameraRig;
+        Debug.Log(cameraRig == null ? "[OVRComposition] CameraRig not found" : "[OVRComposition] CameraRig found");
+    }
 
-	public OVRPose ComputeCameraWorldSpacePose(OVRPlugin.CameraExtrinsics extrinsics, Camera mainCamera)
+    public OVRPose ComputeCameraWorldSpacePose(OVRPlugin.CameraExtrinsics extrinsics)
 	{
 		OVRPose trackingSpacePose = ComputeCameraTrackingSpacePose(extrinsics);
-		OVRPose worldSpacePose = OVRExtensions.ToWorldSpacePose(trackingSpacePose, mainCamera);
+		OVRPose worldSpacePose = OVRExtensions.ToWorldSpacePose(trackingSpacePose);
 		return worldSpacePose;
 	}
 

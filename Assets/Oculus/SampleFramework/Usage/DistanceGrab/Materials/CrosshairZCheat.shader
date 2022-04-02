@@ -28,8 +28,6 @@ Shader "Custom/CrosshairZCheat"
 					float4 vertex : POSITION;
 					float2 texcoord : TEXCOORD0;
 					fixed4 color : COLOR;
-
-					UNITY_VERTEX_INPUT_INSTANCE_ID
 				};
 	
 				struct v2f
@@ -37,8 +35,6 @@ Shader "Custom/CrosshairZCheat"
 					float4 vertex : SV_POSITION;
 					half2 texcoord : TEXCOORD0;
 					fixed4 color : COLOR;
-
-					UNITY_VERTEX_OUTPUT_STEREO
 				};
 	
 				sampler2D _MainTex;
@@ -47,12 +43,8 @@ Shader "Custom/CrosshairZCheat"
 				
 				v2f vert (appdata v)
 				{
-					v2f o;
-					UNITY_SETUP_INSTANCE_ID(v);
-					UNITY_INITIALIZE_OUTPUT(v2f, o);
-					UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
-
 					// Cheat the post-mvp transformed z towards the camera.
+					v2f o;
 					o.vertex = UnityObjectToClipPos(v.vertex);
 					o.vertex.z -= 0.01;
 					o.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);

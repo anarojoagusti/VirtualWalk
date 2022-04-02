@@ -1,8 +1,12 @@
 /************************************************************************************
 Copyright : Copyright (c) Facebook Technologies, LLC and its affiliates. All rights reserved.
 
-Your use of this SDK or tool is subject to the Oculus SDK License Agreement, available at
-https://developer.oculus.com/licenses/oculussdk/
+Licensed under the Oculus Master SDK License Version 1.0 (the "License"); you may not use
+the Utilities SDK except in compliance with the License, which is provided at the time of installation
+or download, or which otherwise accompanies this software in either electronic or hard copy form.
+
+You may obtain a copy of the License at
+https://developer.oculus.com/licenses/oculusmastersdk-1.0/
 
 Unless required by applicable law or agreed to in writing, the Utilities SDK distributed
 under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
@@ -46,7 +50,7 @@ internal static class OVRMixedReality
 	/// Updates the internal state of the Mixed Reality Camera. Called by OVRManager.
 	/// </summary>
 
-	public static void Update(GameObject parentObject, Camera mainCamera, OVRMixedRealityCaptureConfiguration configuration, OVRManager.TrackingOrigin trackingOrigin)
+	public static void Update(GameObject parentObject, Camera mainCamera, OVRManager.CompositionMethod compositionMethod, bool useDynamicLighting, OVRManager.CameraDevice cameraDevice, OVRManager.DepthQuality depthQuality)
 	{
 		if (!OVRPlugin.initialized)
 		{
@@ -82,34 +86,34 @@ internal static class OVRMixedReality
 		useFakeExternalCamera = OVRPlugin.Media.UseMrcDebugCamera();
 #endif
 
-		if (currentComposition != null && (currentComposition.CompositionMethod() != configuration.compositionMethod))
+		if (currentComposition != null && currentComposition.CompositionMethod() != compositionMethod)
 		{
 			currentComposition.Cleanup();
 			currentComposition = null;
 		}
 
-		if (configuration.compositionMethod == OVRManager.CompositionMethod.External)
+		if (compositionMethod == OVRManager.CompositionMethod.External)
 		{
 			if (currentComposition == null)
 			{
-				currentComposition = new OVRExternalComposition(parentObject, mainCamera, configuration);
+				currentComposition = new OVRExternalComposition(parentObject, mainCamera);
 			}
 		}
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
-		else if (configuration.compositionMethod == OVRManager.CompositionMethod.Direct)
+		else if (compositionMethod == OVRManager.CompositionMethod.Direct)
 		{
 			if (currentComposition == null)
 			{
-				currentComposition = new OVRDirectComposition(parentObject, mainCamera, configuration);
+				currentComposition = new OVRDirectComposition(parentObject, mainCamera, cameraDevice, useDynamicLighting, depthQuality);
 			}
 		}
 #endif
 		else
 		{
-			Debug.LogError("Unknown CompositionMethod : " + configuration.compositionMethod);
+			Debug.LogError("Unknown CompositionMethod : " + compositionMethod);
 			return;
 		}
-		currentComposition.Update(parentObject, mainCamera, configuration, trackingOrigin);
+		currentComposition.Update(parentObject, mainCamera);
 	}
 
 	public static void Cleanup()
