@@ -93,7 +93,7 @@ Material:
     - _ColorContrast: 1
     - _ColorMultiplier: 1
     - _Culling: 0
-    - _Cutoff: 0.5
+    - _Cutoff: 0.126
     - _DebugBending: 0
     - _DebugMode: 4
     - _DetailMode: 0
@@ -139,4 +139,5 @@ Material:
     - _BaseWindMultipliers: {r: 0.6, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HueVariation: {r: 0, g: 0.9, b: 0.8255172, a: 0.1}
+    - _HueVariation: {r: 0, g: 0, b: 0, a: 0.1}
+  m_BuildTextureStacks: []
