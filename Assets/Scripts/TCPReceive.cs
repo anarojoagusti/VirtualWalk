@@ -19,12 +19,10 @@ public class TCPReceive : MonoBehaviour
 	public string showMessage;
 	public Text ip_message;
 	public Image icono;
-	public SampleMessageListener sml;
+	public int once = 0;
+	public bool long_pierna_get = false;
 	public string serverMessage = null;
-    //public Text t_panel_id;
-    //public GameObject panel;
-    //public int currentTimestamp;
-    //public int lastTimeStamp;
+    
     #endregion
 
 
@@ -64,6 +62,7 @@ public class TCPReceive : MonoBehaviour
 			SendMessage();
 			while (true)
 			{
+				
 				// Get a stream object for reading 				
 				using (NetworkStream stream = socketConnection.GetStream())
 				{
@@ -78,7 +77,7 @@ public class TCPReceive : MonoBehaviour
 							var incommingData = new byte[length];
 							Array.Copy(bytes, 0, incommingData, 0, length);
 
-							// Convert byte array to string message. 						
+							// Convert byte array to string message					
 							serverMessage = Encoding.ASCII.GetString(incommingData);
 							
 							//sml.OnMessageArrived(serverMessage);
@@ -125,16 +124,44 @@ public class TCPReceive : MonoBehaviour
 		}
 	}
 
+
 	void Update()
     {
-		Debug.Log(serverMessage);
-		if (serverMessage != null)
+		Debug.Log("message arrived: " + serverMessage);
+		string[] msg_split = serverMessage.Split('|');
+		if (msg_split.Length < 3)
+			return;
+		else
 		{
-			icono.color = Color.green;
-			StepController.instance.ActivateSteps();
-			sml.OnMessageArrived(serverMessage);
+			if (once == 0)
+			{
+				icono.color = Color.green;
+				StepController.instance.ActivateSteps();
+				once ++;
+			}
+			
+			if (long_pierna_get)
+			{
+				//EMGParams data = JsonUtility.FromJson<EMGParams>("{" + msg_start[1]);
+				//t_data_received.text = data.ShowParams();
+				StepController.instance.UpdateStride(float.Parse(msg_split[1]), float.Parse(msg_split[0]));
+			}
+			else
+			{
+
+				//EMGParams data = JsonUtility.FromJson<EMGParams>("{" + msg_start[1]);
+				StepController.instance.longitud_pierna = float.Parse(msg_split[2]);
+				//long_pierna_get = true;
+				StepController.instance.SetReferences();
+			}
 		}
     }
+
+	// Invoked when a line of data is received from the serial device.
+	public void OnMessageArrived(string msg)
+	{
+
+	}
 
 	//public void OKButton()
 	//{
@@ -147,7 +174,7 @@ public class TCPReceive : MonoBehaviour
 	//	IP += x.ToString();
 	//	t_panel_id.text = IP;
 	//}
-	
+
 	//public void Button_remove()
 	//{
 	//	string id_aux = IP.Substring(0, IP.Length - 1);
