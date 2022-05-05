@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Materials.meta
 guid: 323d38bb22ca5e34781b739870dfd46c
 folderAsset: yes
 timeCreated: 1461676498
+=======
+guid: fc27c5e5aabe20c439f9526aa8454955
+folderAsset: yes
+timeCreated: 1436977288
+>>>>>>> main:Assets/Hierbas/Rabbits/Demo/Scripts.meta
 licenseType: Store
 DefaultImporter:
   userData: 

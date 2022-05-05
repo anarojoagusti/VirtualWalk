@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Hierbas/Poly Ninja/Stykized Vegetation Pack Free/Prefabs.meta
 guid: e7779e69d57e5704d840c9163f2c9561
 folderAsset: yes
 timeCreated: 1459711508
+=======
+guid: 721a043b2e94a8147bb677e44260a194
+folderAsset: yes
+timeCreated: 1436977288
+>>>>>>> main:Assets/Hierbas/Rabbits/Demo/Prefabs.meta
 licenseType: Store
 DefaultImporter:
   userData: 

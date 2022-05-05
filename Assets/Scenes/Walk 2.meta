@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: eb30d3ffd6ab28247bf97df1d6e7a50b
+=======
+<<<<<<<< HEAD:Assets/Hierbas/Numena.meta
+guid: 07decc97152ac9d4c990603871777160
+========
+guid: c490213e586f90543ac329ea67c8339a
+>>>>>>>> main:Assets/Scenes/Walk 2.meta
+>>>>>>> main
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

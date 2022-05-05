@@ -1,16 +1,3 @@
-/************************************************************************************
-Copyright : Copyright (c) Facebook Technologies, LLC and its affiliates. All rights reserved.
-
-Your use of this SDK or tool is subject to the Oculus SDK License Agreement, available at
-https://developer.oculus.com/licenses/oculussdk/
-
-Unless required by applicable law or agreed to in writing, the Utilities SDK distributed
-under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-ANY KIND, either express or implied. See the License for the specific language governing
-permissions and limitations under the License.
-************************************************************************************/
-
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,7 +23,7 @@ public class OVROverlayEditor : Editor
 	{
 		Custom = 0,
 		Full = 1,
-		Half = 2,
+		Half = 2
 	}
 
 	private bool sourceRectsVisible = false;
@@ -108,26 +95,6 @@ public class OVROverlayEditor : Editor
 		Bottom
 	}
 
-	private GUIContent[] selectableShapeNames;
-	private OVROverlay.OverlayShape[] selectableShapeValues;
-
-	private void Awake()
-	{
-		List<GUIContent> selectableShapeNameList = new List<GUIContent>();
-		List<OVROverlay.OverlayShape> selectableShapesValueList = new List<OVROverlay.OverlayShape>();
-		foreach (OVROverlay.OverlayShape value in Enum.GetValues(typeof(OVROverlay.OverlayShape)))
-		{
-			if (!OVROverlay.IsPassthroughShape(value))
-			{
-				string name = Enum.GetName(typeof(OVROverlay.OverlayShape), value);
-				selectableShapeNameList.Add(new GUIContent(name, name));
-				selectableShapesValueList.Add(value);
-			}
-		}
-		selectableShapeNames = selectableShapeNameList.ToArray();
-		selectableShapeValues = selectableShapesValueList.ToArray();
-	}
-
 	public override void OnInspectorGUI()
 	{
 		OVROverlay overlay = (OVROverlay)target;
@@ -143,26 +110,7 @@ public class OVROverlayEditor : Editor
 		EditorGUILayout.Space();
 
 		EditorGUILayout.LabelField(new GUIContent("Overlay Shape", "The shape of this overlay"), EditorStyles.boldLabel);
-		// If the overlay shape has been set to a passthrough shape (via scripting), do not allow to change it.
-		if (!OVROverlay.IsPassthroughShape(overlay.currentOverlayShape))
-		{
-			int currentShapeIndex = Array.IndexOf(selectableShapeValues, overlay.currentOverlayShape);
-			if (currentShapeIndex == -1)
-			{
-				Debug.LogError("Invalid shape encountered");
-				currentShapeIndex = 0;
-			}
-			currentShapeIndex = EditorGUILayout.Popup(new GUIContent("Overlay Shape", "The shape of this overlay"), currentShapeIndex, selectableShapeNames);
-			overlay.currentOverlayShape = selectableShapeValues[currentShapeIndex];
-
-		}
-
-		EditorGUILayout.Space();
-
-		EditorGUILayout.LabelField("Layer Properties", EditorStyles.boldLabel);
-		overlay.useBicubicFiltering = EditorGUILayout.Toggle(new GUIContent("Bicubic Filtering",
-			"Whether this layer should use bicubic filtering. This can increase quality for small details on text and icons being viewed at farther distances."), overlay.useBicubicFiltering);
-
+		overlay.currentOverlayShape = (OVROverlay.OverlayShape)EditorGUILayout.EnumPopup(new GUIContent("Overlay Shape", "The shape of this overlay"), overlay.currentOverlayShape);
 		EditorGUILayout.Space();
 
 		EditorGUILayout.Separator();
@@ -218,7 +166,7 @@ public class OVROverlayEditor : Editor
 			overlay.isProtectedContent = EditorGUILayout.Toggle(new GUIContent("Is Protected Content", "The texture has copy protection, e.g., HDCP"), overlay.isProtectedContent);
 #endif
 		}
-		if (overlay.currentOverlayShape == OVROverlay.OverlayShape.Cylinder || overlay.currentOverlayShape == OVROverlay.OverlayShape.Equirect || overlay.currentOverlayShape == OVROverlay.OverlayShape.Quad || overlay.currentOverlayShape == OVROverlay.OverlayShape.Fisheye)
+		if (overlay.currentOverlayShape == OVROverlay.OverlayShape.Cylinder || overlay.currentOverlayShape == OVROverlay.OverlayShape.Equirect || overlay.currentOverlayShape == OVROverlay.OverlayShape.Quad)
 		{
 
 			EditorGUILayout.Separator();
@@ -371,7 +319,6 @@ public class OVROverlayEditor : Editor
 				overlay.invertTextureRects = EditorGUILayout.Toggle(new GUIContent("Invert Rect Coordinates", "Check this box to use the top left corner of the texture as the origin"), overlay.invertTextureRects);
 			}
 		}
-
 		EditorGUILayout.Separator();
 		EditorGUILayout.LabelField("Color Scale", EditorStyles.boldLabel);
 		EditorGUILayout.Space();
@@ -386,8 +333,6 @@ public class OVROverlayEditor : Editor
 		EditorGUILayout.Separator();
 		EditorGUILayout.LabelField("Preview", EditorStyles.boldLabel);
 		overlay.previewInEditor = EditorGUILayout.Toggle(new GUIContent("Preview in Editor (Experimental)", "Preview the overlay in the editor using a mesh renderer."), overlay.previewInEditor);
-
-
 
 		EditorUtility.SetDirty(overlay);
 	}
@@ -466,7 +411,6 @@ public class OVROverlayEditor : Editor
 			case DisplayType.Half:
 				destRectLeft = destRectRight = new Rect(0.25f, 0, 0.5f, 1);
 				break;
-
 			default:
 				destRectLeft = overlay.destRectLeft;
 				destRectRight = overlay.destRectRight;

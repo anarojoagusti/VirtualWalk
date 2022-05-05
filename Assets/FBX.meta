@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/FBX.meta
 guid: 6d7bdb3e5a1c5a048ac11bba55425edd
 folderAsset: yes
 timeCreated: 1461936964
+=======
+guid: 082d79004e8a23141b56b2a7ffcfca83
+folderAsset: yes
+timeCreated: 1436977287
+>>>>>>> main:Assets/Hierbas/Rabbits/Demo/Animator.meta
 licenseType: Store
 DefaultImporter:
   userData: 
