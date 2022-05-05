@@ -22,11 +22,11 @@ public class TCPReceive : MonoBehaviour
 	public int once = 0;
 	public bool long_pierna_get = false;
 	public string serverMessage = null;
-    
-    #endregion
+	//public Text t_data_received;
+	#endregion
 
 
-    private void Start()
+	private void Start()
     {
 		//SendMessage();
 		init();
@@ -143,7 +143,7 @@ public class TCPReceive : MonoBehaviour
 			if (long_pierna_get)
 			{
 				//EMGParams data = JsonUtility.FromJson<EMGParams>("{" + msg_start[1]);
-				//t_data_received.text = data.ShowParams();
+				ip_message.text = "derecha: "+ msg_split[0] + ", izquierda: "+ msg_split[1];
 				StepController.instance.UpdateStride(float.Parse(msg_split[1]), float.Parse(msg_split[0]));
 			}
 			else
@@ -151,7 +151,7 @@ public class TCPReceive : MonoBehaviour
 
 				//EMGParams data = JsonUtility.FromJson<EMGParams>("{" + msg_start[1]);
 				StepController.instance.longitud_pierna = float.Parse(msg_split[2]);
-				//long_pierna_get = true;
+				long_pierna_get = true;
 				StepController.instance.SetReferences();
 			}
 		}
