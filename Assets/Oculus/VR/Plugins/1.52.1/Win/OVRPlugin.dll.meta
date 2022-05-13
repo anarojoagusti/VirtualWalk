@@ -45,41 +45,7 @@ PluginImporter:
     second:
       enabled: 1
       settings:
-<<<<<<< HEAD:Assets/Oculus/VR/Plugins/1.70.0/Win64/OVRPlugin.dll.meta
-        CPU: x86_64
         DefaultValueInitialized: true
-        OS: Windows
-  - first:
-      Standalone: Linux64
-    second:
-      enabled: 0
-      settings:
-        CPU: None
-  - first:
-      Standalone: OSXUniversal
-    second:
-      enabled: 0
-      settings:
-        CPU: None
-  - first:
-      Standalone: Win
-    second:
-      enabled: 0
-      settings:
-        CPU: None
-  - first:
-      Standalone: Win64
-=======
-        CPU: X86
-        DefaultValueInitialized: true
-        OS: Windows
-  - first:
-      Standalone: Win
->>>>>>> main:Assets/Oculus/VR/Plugins/1.52.1/Win/OVRPlugin.dll.meta
-    second:
-      enabled: 0
-      settings:
-        CPU: None
   userData: 
   assetBundleName: 
   assetBundleVariant: 
